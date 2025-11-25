@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio of Sanjay Kumar M - UI/UX Designer & Python Developer">
+    <title>SANJAY KUMAR M | Portfolio</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class', 
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-accent': '#06b6d4', /* Cyan 500 */
+                        'secondary-accent': '#f59e0b', /* Amber 500 */
+                        'bg-dark': '#111827', /* Gray 900 */
+                        'card-dark': '#1f2937', /* Gray 800 */
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Base styles */
+        body {
+            background-color: #111827;
+            color: #f3f4f6;
+            overflow-x: hidden;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-thumb { background: #374151; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #06b6d4; }
+        ::-webkit-scrollbar-track { background: #111827; }
+
+        /* Skill Tag Hover Animation */
+        .skill-tag {
+            @apply text-sm font-medium px-4 py-1.5 rounded-full shadow-sm border border-transparent transition-all duration-300;
+        }
+        .skill-tag:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(6, 182, 212, 0.2);
+        }
+
+        /* Scroll Reveal Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Delays */
+        .delay-100 { transition-delay: 0.1s; }
+        .delay-200 { transition-delay: 0.2s; }
+        .delay-300 { transition-delay: 0.3s; }
+    </style>
+</head>
+<body class="font-sans bg-bg-dark text-gray-100 selection:bg-primary-accent selection:text-white">
+
+    <!-- Navbar -->
+    <header class="fixed top-0 w-full z-50 bg-bg-dark/90 backdrop-blur-lg border-b border-gray-800 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <a href="#hero" class="text-xl md:text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-primary-accent to-secondary-accent hover:opacity-80 transition-opacity duration-300">
+                SANJAY KUMAR M
+            </a>
+            
+            <div class="flex items-center space-x-4">
+                <!-- Desktop Nav -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#skills" class="text-gray-300 hover:text-primary-accent transition duration-300 font-medium relative group">
+                        Skills
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-accent transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#projects" class="text-gray-300 hover:text-primary-accent transition duration-300 font-medium relative group">
+                        Projects
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-accent transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#connect" class="text-gray-300 hover:text-primary-accent transition duration-300 font-medium relative group">
+                        Connect
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-accent transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobileMenuButton" class="p-2 rounded-lg text-gray-300 md:hidden hover:bg-gray-800 transition duration-300">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobileMenu" class="fixed inset-0 bg-gray-900/98 z-40 hidden transition-opacity duration-300 opacity-0 backdrop-blur-xl">
+        <div class="flex justify-end p-8">
+            <button id="closeMobileMenu" class="text-white hover:text-secondary-accent transition duration-300 transform hover:rotate-90">
+                <i data-lucide="x" class="w-8 h-8"></i>
+            </button>
+        </div>
+        <nav class="flex flex-col items-center space-y-8 mt-10">
+            <a href="#skills" class="text-3xl text-gray-100 hover:text-primary-accent transition duration-300 font-bold" onclick="toggleMenu()">Skills</a>
+            <a href="#projects" class="text-3xl text-gray-100 hover:text-primary-accent transition duration-300 font-bold" onclick="toggleMenu()">Projects</a>
+            <a href="#connect" class="text-3xl text-gray-100 hover:text-primary-accent transition duration-300 font-bold" onclick="toggleMenu()">Connect</a>
+        </nav>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="hero" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        <!-- Background Blobs -->
+        <div class="absolute top-0 right-0 -mr-20 -mt-20 w-[600px] h-[600px] bg-primary-accent/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-[500px] h-[500px] bg-secondary-accent/5 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center justify-between relative z-10">
+            
+            <!-- Image (Order 2 on Mobile, Order 1 on Desktop) -->
+            <div class="relative lg:w-5/12 flex justify-center order-1 lg:order-2 mb-12 lg:mb-0 reveal delay-200">
+                <div class="relative p-2 bg-gradient-to-br from-primary-accent to-secondary-accent rounded-full shadow-2xl animate-float">
+                    <div class="bg-bg-dark rounded-full p-1">
+                        <!-- Using a reliable avatar generator as fallback if local image fails -->
+                        <img 
+                            src="sanjay1.jpg" 
+                            alt="Sanjay Kumar M" 
+                            class="w-64 h-64 md:w-80 md:h-80 object-cover rounded-full transition duration-500 hover:brightness-110"
+                            onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=Sanjay+Kumar&background=06b6d4&color=fff&size=512';"
+                        >
+                    </div>
+                </div>
+            </div>
+
+            <!-- Text Content -->
+            <div class="lg:w-1/2 order-2 lg:order-1 text-center lg:text-left reveal">
+                <h1 class="text-4xl sm:text-5xl md:text-7xl font-extrabold leading-tight mb-6 tracking-tight">
+                    <span class="block text-gray-100">Blending</span>
+                    <span class="bg-clip-text text-transparent bg-gradient-to-r from-primary-accent to-secondary-accent">Design & Logic</span>
+                </h1>
+                
+                <p class="text-2xl font-medium text-gray-300 mb-2">SANJAY KUMAR M</p>
+                <p class="text-lg md:text-xl text-gray-400 font-light mb-8 max-w-2xl mx-auto lg:mx-0">
+                    Crafting intuitive user experiences backed by robust Python and Java engineering.
+                </p>
+                
+                <div class="mb-10 inline-flex items-center px-4 py-2 rounded-full bg-gray-800/80 border border-gray-700 hover:border-secondary-accent/50 transition-colors duration-300 backdrop-blur-sm">
+                    <i data-lucide="crown" class="w-4 h-4 mr-2 text-secondary-accent"></i>
+                    <span class="text-sm font-semibold text-secondary-accent mr-2">FOUNDER @ SPARKLANCE</span>
+                    <a href="https://sparklance-solutions.netlify.app/" target="_blank" class="text-xs text-gray-400 hover:text-white underline decoration-gray-500 hover:decoration-white transition-all">Visit Site &rarr;</a>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                    <a href="#projects" class="inline-flex items-center justify-center px-8 py-4 text-base font-bold text-bg-dark bg-secondary-accent rounded-xl hover:bg-white transition-all duration-300 shadow-[0_0_20px_rgba(245,158,11,0.3)] hover:shadow-[0_0_30px_rgba(245,158,11,0.5)] transform hover:-translate-y-1">
+                        Explore Portfolio
+                    </a>
+                    <a href="#connect" class="inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white border border-gray-600 rounded-xl hover:bg-gray-800 transition-all duration-300">
+                        Contact Me
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-gray-900/50 border-t border-gray-800/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-center mb-16 text-gray-100 reveal">
+                Core Competencies
+            </h2>
+            
+            <div class="grid md:grid-cols-2 gap-8 lg:gap-12">
+                
+                <!-- Skill Card 1 -->
+                <div class="reveal delay-100 p-8 rounded-3xl bg-card-dark border border-gray-700/50 hover:border-secondary-accent/50 transition-all duration-500 hover:shadow-[0_0_30px_rgba(245,158,11,0.1)] group">
+                    <div class="flex items-center mb-6">
+                        <div class="p-3 rounded-2xl bg-gray-800 group-hover:bg-secondary-accent/10 transition-colors">
+                            <i data-lucide="tablet-smartphone" class="w-8 h-8 text-secondary-accent"></i>
+                        </div>
+                        <h3 class="ml-4 text-2xl font-bold text-gray-100">Product Design & UX</h3>
+                    </div>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        Translating complex user needs into simple, elegant, and effective digital experiences. Expertise in end-to-end product lifecycle design.
+                    </p>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="skill-tag bg-gray-800 text-amber-400 border-gray-700">Figma</span>
+                        <span class="skill-tag bg-gray-800 text-amber-400 border-gray-700">Prototyping</span>
+                        <span class="skill-tag bg-gray-800 text-amber-400 border-gray-700">Wireframing</span>
+                        <span class="skill-tag bg-gray-800 text-amber-400 border-gray-700">Design Systems</span>
+                    </div>
+                </div>
+
+                <!-- Skill Card 2 -->
+                <div class="reveal delay-200 p-8 rounded-3xl bg-card-dark border border-gray-700/50 hover:border-primary-accent/50 transition-all duration-500 hover:shadow-[0_0_30px_rgba(6,182,212,0.1)] group">
+                    <div class="flex items-center mb-6">
+                        <div class="p-3 rounded-2xl bg-gray-800 group-hover:bg-primary-accent/10 transition-colors">
+                            <i data-lucide="code" class="w-8 h-8 text-primary-accent"></i>
+                        </div>
+                        <h3 class="ml-4 text-2xl font-bold text-gray-100">Engineering & Dev</h3>
+                    </div>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        Developing robust, scalable backend services, including Python automation and modern Java enterprise solutions.
+                    </p>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="skill-tag bg-gray-800 text-cyan-400 border-gray-700">Java (J2EE)</span>
+                        <span class="skill-tag bg-gray-800 text-cyan-400 border-gray-700">Spring Boot</span>
+                        <span class="skill-tag bg-gray-800 text-cyan-400 border-gray-700">Python 3</span>
+                        <span class="skill-tag bg-gray-800 text-cyan-400 border-gray-700">Django</span>
+                        <span class="skill-tag bg-gray-800 text-cyan-400 border-gray-700">REST APIs</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-center mb-16 text-gray-100 reveal">
+                Featured Projects
+            </h2>
+
+            <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+
+                <!-- Project 1 -->
+                <div class="reveal delay-100 flex flex-col h-full bg-card-dark rounded-3xl overflow-hidden border border-gray-800 hover:border-secondary-accent transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-secondary-accent/10">
+                    <div class="p-8 flex-grow">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="p-3 bg-gray-900/50 rounded-xl">
+                                <i data-lucide="graduation-cap" class="w-8 h-8 text-secondary-accent"></i>
+                            </div>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-100 mb-2">School Information System</h3>
+                        <p class="text-sm font-semibold text-secondary-accent mb-4 tracking-wide">UI/UX • FIGMA • DESIGN SYSTEM</p>
+                        <p class="text-gray-400 leading-relaxed">
+                            A complete design overhaul and component library development for a School Information System, focusing on intuitive navigation and responsive interfaces.
+                        </p>
+                    </div>
+                    <div class="p-8 pt-0 mt-auto">
+                        <a href="https://github.com/Sharan242007/SIS.git" target="_blank" class="inline-flex items-center justify-center w-full px-4 py-3 bg-gray-800 hover:bg-secondary-accent hover:text-bg-dark text-gray-200 rounded-xl transition-all duration-300 font-semibold group">
+                            <i data-lucide="github" class="w-5 h-5 mr-2 group-hover:scale-110 transition-transform"></i>
+                            View Design Repo
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="reveal delay-200 flex flex-col h-full bg-card-dark rounded-3xl overflow-hidden border border-gray-800 hover:border-primary-accent transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary-accent/10">
+                    <div class="p-8 flex-grow">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="p-3 bg-gray-900/50 rounded-xl">
+                                <i data-lucide="shield-plus" class="w-8 h-8 text-primary-accent"></i>
+                            </div>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-100 mb-2">Hospital Management System</h3>
+                        <p class="text-sm font-semibold text-primary-accent mb-4 tracking-wide">PYTHON • BEAUTIFULSOUP • SQL</p>
+                        <p class="text-gray-400 leading-relaxed">
+                            Developed a robust backend using Python, featuring web scraping capabilities with BeautifulSoup for data integration and efficient database management.
+                        </p>
+                    </div>
+                    <div class="p-8 pt-0 mt-auto">
+                        <a href="https://github.com/sanjaykumar2007-coder/School-information-system" target="_blank" class="inline-flex items-center justify-center w-full px-4 py-3 bg-gray-800 hover:bg-primary-accent hover:text-bg-dark text-gray-200 rounded-xl transition-all duration-300 font-semibold group">
+                            <i data-lucide="github" class="w-5 h-5 mr-2 group-hover:scale-110 transition-transform"></i>
+                            View Source Code
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Connect Section -->
+    <section id="connect" class="py-20 bg-gray-900/30">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-center mb-4 text-gray-100 reveal">
+                Let's Connect
+            </h2>
+            <p class="text-lg text-center text-gray-400 mb-12 reveal delay-100">
+                Open to new opportunities and collaborations.
+            </p>
+
+            <div class="bg-card-dark p-8 md:p-10 rounded-3xl border border-gray-800 shadow-2xl reveal delay-200">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    
+                    <a href="mailto:sanjay09062007@gmail.com" class="flex items-center p-4 rounded-xl hover:bg-gray-800 border border-transparent hover:border-gray-700 transition-all duration-300 group">
+                        <div class="p-3 bg-gray-900 rounded-lg group-hover:scale-110 transition-transform">
+                            <i data-lucide="mail" class="w-6 h-6 text-primary-accent"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-xs text-gray-500 uppercase font-bold tracking-wider">Email</p>
+                            <p class="text-sm font-medium text-gray-200 truncate">sanjay09062007@gmail.com</p>
+                        </div>
+                    </a>
+
+                    <a href="https://www.linkedin.com/in/sanjay-kumar-a45234354/" target="_blank" class="flex items-center p-4 rounded-xl hover:bg-gray-800 border border-transparent hover:border-gray-700 transition-all duration-300 group">
+                        <div class="p-3 bg-gray-900 rounded-lg group-hover:scale-110 transition-transform">
+                            <i data-lucide="linkedin" class="w-6 h-6 text-primary-accent"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-xs text-gray-500 uppercase font-bold tracking-wider">LinkedIn</p>
+                            <p class="text-sm font-medium text-gray-200">View Profile</p>
+                        </div>
+                    </a>
+
+                    <a href="https://www.instagram.com/sanjaykumarsanjaykumar4219" target="_blank" class="flex items-center p-4 rounded-xl hover:bg-gray-800 border border-transparent hover:border-gray-700 transition-all duration-300 group">
+                        <div class="p-3 bg-gray-900 rounded-lg group-hover:scale-110 transition-transform">
+                            <i data-lucide="instagram" class="w-6 h-6 text-secondary-accent"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-xs text-gray-500 uppercase font-bold tracking-wider">Instagram</p>
+                            <p class="text-sm font-medium text-gray-200">Follow Me</p>
+                        </div>
+                    </a>
+
+                    <a href="https://sparklance-solution.netlify.app/" target="_blank" class="flex items-center p-4 rounded-xl hover:bg-gray-800 border border-transparent hover:border-gray-700 transition-all duration-300 group">
+                        <div class="p-3 bg-gray-900 rounded-lg group-hover:scale-110 transition-transform">
+                            <i data-lucide="globe" class="w-6 h-6 text-secondary-accent"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-xs text-gray-500 uppercase font-bold tracking-wider">Sparklance</p>
+                            <p class="text-sm font-medium text-gray-200">Company Site</p>
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black/40 border-t border-gray-800 py-8">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="text-gray-500 text-sm mb-4">&copy; <span id="currentYear"></span> SANJAY KUMAR M. All rights reserved.</p>
+            <div class="flex justify-center space-x-8">
+                <a href="https://github.com/sanjaykumar2007-coder" target="_blank" class="text-gray-600 hover:text-primary-accent transition-colors" title="GitHub">
+                    <i data-lucide="github" class="w-6 h-6"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/sanjay-kumar-a45234354/" target="_blank" class="text-gray-600 hover:text-primary-accent transition-colors" title="LinkedIn">
+                    <i data-lucide="linkedin" class="w-6 h-6"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Footer Year
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Mobile Menu Logic
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const closeMobileMenu = document.getElementById('closeMobileMenu');
+        
+        const toggleMenu = () => {
+            const isHidden = mobileMenu.classList.contains('hidden');
+            if (isHidden) {
+                mobileMenu.classList.remove('hidden');
+                // Use setTimeout to ensure the browser processes the 'hidden' removal before starting transition
+                requestAnimationFrame(() => {
+                    mobileMenu.classList.remove('opacity-0');
+                });
+                document.body.style.overflow = 'hidden'; // Prevent scrolling
+            } else {
+                mobileMenu.classList.add('opacity-0');
+                setTimeout(() => {
+                    mobileMenu.classList.add('hidden');
+                    document.body.style.overflow = ''; // Restore scrolling
+                }, 300);
+            }
+        };
+
+        mobileMenuButton.addEventListener('click', toggleMenu);
+        closeMobileMenu.addEventListener('click', toggleMenu);
+
+        // --- SCROLL REVEAL ANIMATION SCRIPT ---
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1 // Trigger when 10% of the element is visible
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target); // Only animate once
+                }
+            });
+        }, observerOptions);
+
+        // Select all elements with the 'reveal' class
+        document.querySelectorAll('.reveal').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
